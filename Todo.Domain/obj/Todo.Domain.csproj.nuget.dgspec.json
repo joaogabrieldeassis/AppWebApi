@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\todo\\todo.domain\\Todo.Domain.csproj": {}
+    "C:\\todo\\Todo.Domain\\Todo.Domain.csproj": {}
   },
   "projects": {
-    "C:\\todo\\todo.domain\\Todo.Domain.csproj": {
+    "C:\\todo\\Todo.Domain\\Todo.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\todo\\todo.domain\\Todo.Domain.csproj",
+        "projectUniqueName": "C:\\todo\\Todo.Domain\\Todo.Domain.csproj",
         "projectName": "Todo.Domain",
-        "projectPath": "C:\\todo\\todo.domain\\Todo.Domain.csproj",
+        "projectPath": "C:\\todo\\Todo.Domain\\Todo.Domain.csproj",
         "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
-        "outputPath": "C:\\todo\\todo.domain\\obj\\",
+        "outputPath": "C:\\todo\\Todo.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -21,15 +21,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -40,12 +39,17 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "netstandard2.0": {
           "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
             "flunt": {
               "target": "Package",
-              "version": "[2.0.5, )"
+              "version": "[1.0.4, )"
             }
           },
           "imports": [
@@ -58,12 +62,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
