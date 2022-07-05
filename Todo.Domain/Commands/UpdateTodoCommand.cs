@@ -8,7 +8,6 @@ namespace Todo.Domain.Commands
     public class UpdateTodoCommand : Notifiable, ICommand
     {
         public UpdateTodoCommand() { }
-
         public UpdateTodoCommand(Guid id, string title, string user)
         {
             Id = id;
@@ -19,14 +18,12 @@ namespace Todo.Domain.Commands
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string User { get; set; }
-
         public void Validate()
         {
-            AddNotifications(
-                new Contract()
-                    .Requires()
-                    .HasMinLen(Title, 3, "Title", "Por favor, descreva melhor esta tarefa!")
-                    .HasMinLen(User, 6, "User", "Usuário inválido!")
+            AddNotifications(new Contract()
+            .Requires()
+            .HasMinLen(User, 2, "User", "Usuario com muitos poucos caracters")
+            .HasMinLen(Title, 4, "Title", "Tarefa com muitos poucos caracters")
             );
         }
     }
