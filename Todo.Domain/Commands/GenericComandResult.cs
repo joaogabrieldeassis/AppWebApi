@@ -5,10 +5,10 @@ using Todo.Domain.Commands.Contracts;
 
 namespace Todo.Domain.Commands
 {
-    public class GenericComandResult : ICommandResult
+    public class GenericCommandResult : ICommandResult
     {
-        public GenericComandResult() { }
-        public GenericComandResult(bool success, string mensagem, string data)
+        public GenericCommandResult() { }
+        public GenericCommandResult(bool success, string mensagem, object data)
         {
             Success = success;
             Mensagem = mensagem;
@@ -17,6 +17,6 @@ namespace Todo.Domain.Commands
 
         public bool Success { get; set; }
         public string Mensagem { get; set; }
-        public string Data { get; set; }
+        public object Data { get; set; }
     }
 }
