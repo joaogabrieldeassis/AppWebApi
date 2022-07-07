@@ -9,7 +9,9 @@ namespace Todo.Domain.Handlers
 {
     public class TodoHandler : Notifiable,
         IHandler<CreateTodoCommand>,
-        IHandler<UpdateTodoCommand>
+        IHandler<UpdateTodoCommand>,
+        IHandler<MarkTodoAsDoneCommand>,
+        IHandler<MarkTodoAsUnDoneCommand>
     {
         private readonly ITodoRepository _repository;
 
@@ -33,6 +35,7 @@ namespace Todo.Domain.Handlers
         }
 
         public ICommandResult Handle(UpdateTodoCommand command)
+
         {
             //Fail Fast Validation
             command.Validate();
@@ -49,6 +52,40 @@ namespace Todo.Domain.Handlers
             _repository.Update(todo);
 
             return new GenericCommandResult(true, "As alterações foram salvas com sucesso", command.Notifications);
+        }
+
+        public ICommandResult Handle(MarkTodoAsDoneCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Não foi possivel Marcar a tarefa como concluida", command.Notifications);
+
+            //Recupera o usuario
+            var todo = _repository.GetById(command.Id, command.User);
+
+            //Marca a tarefa como concluida
+            todo.MarkAsDone();
+
+            _repository.Update(todo);
+
+            return new GenericCommandResult(true, "A tarefa foi marcada como concluida com sucesso", command.Notifications);
+        }
+
+        public ICommandResult Handle(MarkTodoAsUnDoneCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Não foi possivel atualizar a tarefa", command.Notifications);
+
+            var todo = _repository.GetById(command.Id, command.User);
+
+            todo.MarkAsUndone();
+
+            _repository.Update(todo);
+
+            return new GenericCommandResult(true, "Tarefa alterada com sucesso", command.Notifications);
+
+
         }
     }
 }
