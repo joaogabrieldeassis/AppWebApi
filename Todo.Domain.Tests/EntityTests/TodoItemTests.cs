@@ -1,21 +1,18 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Todo.Domain.Commands;
 using Todo.Domain.Entities;
 
-namespace Todo.Domain.Tests.CommandTests
+namespace Todo.Domain.Tests.EntityTests
 {
     [TestClass]
     public class TodoItemTests
     {
-        private readonly TodoItem _todo = new TodoItem("Tarefa", "joao", DateTime.Now);
+        private readonly TodoItem _validTodo = new TodoItem("Titulo Aqui", "andrebaltieri", DateTime.Now);
 
         [TestMethod]
-        public void Dado_Um_Novo_Todo_O_Mesmo_Nao_Pode_Ser_Concluido()
+        public void Dado_um_novo_todo_o_mesmo_nao_pode_ser_concluido()
         {
-            Assert.AreEqual(_todo.Done, false);
+            Assert.AreEqual(_validTodo.Done, false);
         }
-
-
     }
 }

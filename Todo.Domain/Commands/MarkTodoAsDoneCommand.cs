@@ -8,6 +8,7 @@ namespace Todo.Domain.Commands
     public class MarkTodoAsDoneCommand : Notifiable, ICommand
     {
         public MarkTodoAsDoneCommand() { }
+
         public MarkTodoAsDoneCommand(Guid id, string user)
         {
             Id = id;
@@ -16,11 +17,13 @@ namespace Todo.Domain.Commands
 
         public Guid Id { get; set; }
         public string User { get; set; }
+
         public void Validate()
         {
-            AddNotifications(new Contract()
-            .Requires()
-            .HasMinLen(User, 2, "User", "Poucos caracters para o campo usuario!!")
+            AddNotifications(
+                new Contract()
+                    .Requires()
+                    .HasMinLen(User, 6, "User", "Usuário inválido!")
             );
         }
     }

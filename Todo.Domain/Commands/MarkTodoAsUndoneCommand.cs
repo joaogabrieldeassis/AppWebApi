@@ -5,10 +5,11 @@ using Todo.Domain.Commands.Contracts;
 
 namespace Todo.Domain.Commands
 {
-    public class MarkTodoAsUnDoneCommand : Notifiable, ICommand
+    public class MarkTodoAsUndoneCommand : Notifiable, ICommand
     {
-        public MarkTodoAsUnDoneCommand() { }
-        public MarkTodoAsUnDoneCommand(Guid id, string user)
+        public MarkTodoAsUndoneCommand() { }
+
+        public MarkTodoAsUndoneCommand(Guid id, string user)
         {
             Id = id;
             User = user;
@@ -16,11 +17,13 @@ namespace Todo.Domain.Commands
 
         public Guid Id { get; set; }
         public string User { get; set; }
+
         public void Validate()
         {
-            AddNotifications(new Contract()
-            .Requires()
-            .HasMinLen(User, 2, "User", "Poucos caracters para o campo usuario!!")
+            AddNotifications(
+                new Contract()
+                    .Requires()
+                    .HasMinLen(User, 6, "User", "Usuário inválido!")
             );
         }
     }

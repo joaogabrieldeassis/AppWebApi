@@ -22,10 +22,11 @@ namespace Todo.Domain.Commands
 
         public void Validate()
         {
-            AddNotifications(new Contract()
-            .Requires()
-            .HasMinLen(Title, 3, "Title", "Não foi possivel capitar sua tarefa, por favor defina ela melhor!")
-            .HasMinLen(User, 3, "User", "Usuario com poucos caracters")
+            AddNotifications(
+                new Contract()
+                    .Requires()
+                    .HasMinLen(Title, 3, "Title", "Por favor, descreva melhor esta tarefa!")
+                    .HasMinLen(User, 6, "User", "Usuário inválido!")
             );
         }
     }

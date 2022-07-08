@@ -7,11 +7,12 @@ using Todo.Domain.Repositories;
 
 namespace Todo.Domain.Handlers
 {
-    public class TodoHandler : Notifiable,
+    public class TodoHandler :
+        Notifiable,
         IHandler<CreateTodoCommand>,
         IHandler<UpdateTodoCommand>,
         IHandler<MarkTodoAsDoneCommand>,
-        IHandler<MarkTodoAsUnDoneCommand>
+        IHandler<MarkTodoAsUndoneCommand>
     {
         private readonly ITodoRepository _repository;
 
@@ -22,70 +23,79 @@ namespace Todo.Domain.Handlers
 
         public ICommandResult Handle(CreateTodoCommand command)
         {
+            // Fail Fast Validation
             command.Validate();
             if (command.Invalid)
                 return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
-            //Cria uma tarefa
+            // Gera o TodoItem
             var todo = new TodoItem(command.Title, command.User, command.Date);
 
-            //Salva no banco
+            // Salva no banco
             _repository.Create(todo);
+
+            // Retorna o resultado
             return new GenericCommandResult(true, "Tarefa salva", todo);
         }
 
         public ICommandResult Handle(UpdateTodoCommand command)
-
         {
-            //Fail Fast Validation
+            // Fail Fast Validation
             command.Validate();
             if (command.Invalid)
-                return new GenericCommandResult(false, "A atualização não pode ser concluida", command.Notifications);
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
-            //Recupera o usuario
+            // Recupera o TodoItem (Rehidratação)
             var todo = _repository.GetById(command.Id, command.User);
 
-            //Altera o usuario 
+            // Altera o título
             todo.UpdateTitle(command.Title);
 
-            //salva no banco
+            // Salva no banco
             _repository.Update(todo);
 
-            return new GenericCommandResult(true, "As alterações foram salvas com sucesso", command.Notifications);
+            // Retorna o resultado
+            return new GenericCommandResult(true, "Tarefa salva", todo);
         }
 
         public ICommandResult Handle(MarkTodoAsDoneCommand command)
         {
+            // Fail Fast Validation
             command.Validate();
             if (command.Invalid)
-                return new GenericCommandResult(false, "Não foi possivel Marcar a tarefa como concluida", command.Notifications);
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
-            //Recupera o usuario
+            // Recupera o TodoItem
             var todo = _repository.GetById(command.Id, command.User);
 
-            //Marca a tarefa como concluida
+            // Altera o estado
             todo.MarkAsDone();
 
+            // Salva no banco
             _repository.Update(todo);
 
-            return new GenericCommandResult(true, "A tarefa foi marcada como concluida com sucesso", command.Notifications);
+            // Retorna o resultado
+            return new GenericCommandResult(true, "Tarefa salva", todo);
         }
 
-        public ICommandResult Handle(MarkTodoAsUnDoneCommand command)
+        public ICommandResult Handle(MarkTodoAsUndoneCommand command)
         {
+            // Fail Fast Validation
             command.Validate();
             if (command.Invalid)
-                return new GenericCommandResult(false, "Não foi possivel atualizar a tarefa", command.Notifications);
+                return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
 
+            // Recupera o TodoItem
             var todo = _repository.GetById(command.Id, command.User);
 
+            // Altera o estado
             todo.MarkAsUndone();
 
+            // Salva no banco
             _repository.Update(todo);
 
-            return new GenericCommandResult(true, "Tarefa alterada com sucesso", command.Notifications);
-
-
+            // Retorna o resultado
+            return new GenericCommandResult(true, "Tarefa salva", todo);
         }
     }
 }

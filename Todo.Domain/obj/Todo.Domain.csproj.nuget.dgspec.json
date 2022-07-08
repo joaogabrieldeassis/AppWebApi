@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\todo\\Todo.Domain\\Todo.Domain.csproj": {}
+    "C:\\Todo\\Todo.Domain\\Todo.Domain.csproj": {}
   },
   "projects": {
-    "C:\\todo\\Todo.Domain\\Todo.Domain.csproj": {
+    "C:\\Todo\\Todo.Domain\\Todo.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\todo\\Todo.Domain\\Todo.Domain.csproj",
+        "projectUniqueName": "C:\\Todo\\Todo.Domain\\Todo.Domain.csproj",
         "projectName": "Todo.Domain",
-        "projectPath": "C:\\todo\\Todo.Domain\\Todo.Domain.csproj",
+        "projectPath": "C:\\Todo\\Todo.Domain\\Todo.Domain.csproj",
         "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
-        "outputPath": "C:\\todo\\Todo.Domain\\obj\\",
+        "outputPath": "C:\\Todo\\Todo.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -29,6 +29,7 @@
         },
         "frameworks": {
           "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -40,6 +41,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "dependencies": {
             "NETStandard.Library": {
               "suppressParent": "All",
