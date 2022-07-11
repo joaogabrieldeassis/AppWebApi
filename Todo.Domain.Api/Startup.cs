@@ -26,8 +26,8 @@ namespace Todo.Domain.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
-            // services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
+            //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
 
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddTransient<TodoHandler, TodoHandler>();
@@ -36,13 +36,13 @@ namespace Todo.Domain.Api
                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
                {
-                   options.Authority = "https://securetoken.google.com/project-1064011784157549102";
+                   options.Authority = "https://securetoken.google.com/project-8430470463681215192";
                    options.TokenValidationParameters = new TokenValidationParameters
                    {
                        ValidateIssuer = true,
-                       ValidIssuer = "https://securetoken.google.com/project-1064011784157549102",
+                       ValidIssuer = "https://securetoken.google.com/project-8430470463681215192",
                        ValidateAudience = true,
-                       ValidAudience = "project-1064011784157549102",
+                       ValidAudience = "project-8430470463681215192",
                        ValidateLifetime = true
                    };
                });
